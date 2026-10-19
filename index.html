@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reii Store - Unlock Premium Apps & Edit Services</title>
+    <title>Reii Store - Next-Gen Premium Apps & Digital Hub</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Plus Jakarta Sans -->
@@ -20,15 +20,16 @@
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
                     },
                     colors: {
-                        darkBg: '#0a0a0c',
-                        darkCard: '#12121a',
-                        neonBlue: '#00d2ff',
-                        electricBlue: '#3a7bd5',
+                        darkBg: '#050508',
+                        darkCard: '#0e0e14',
+                        neonBlue: '#00f2fe',
+                        electricBlue: '#4facfe',
+                        cyberPurple: '#b19ee7',
                     },
                     boxShadow: {
-                        'neon': '0 0 25px rgba(0, 210, 255, 0.4)',
-                        'neon-lg': '0 0 40px rgba(0, 210, 255, 0.6)',
-                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                        'neon': '0 0 35px rgba(0, 242, 254, 0.4)',
+                        'neon-lg': '0 0 60px rgba(0, 242, 254, 0.6)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.45)',
                     }
                 }
             }
@@ -37,30 +38,30 @@
 
     <style>
         body {
-            background-color: #0a0a0c;
+            background-color: #050508;
             color: #f8fafc;
             overflow-x: hidden;
         }
 
         .glass-panel {
-            background: rgba(18, 18, 26, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 210, 255, 0.15);
+            background: rgba(14, 14, 20, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
         .glass-nav {
-            background: rgba(10, 10, 12, 0.9);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+            background: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(0, 242, 254, 0.15);
         }
 
-        /* Modern Page & Tab Transition Overlay */
         #page-transition-overlay {
             position: fixed;
             inset: 0;
-            background-color: #0a0a0c;
+            background-color: #050508;
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -76,107 +77,123 @@
             pointer-events: auto;
         }
 
-        @keyframes iconPulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.4)); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 30px rgba(0, 210, 255, 0.8)); }
+        @keyframes cyberSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
         }
 
-        .loader-icon {
-            animation: iconPulse 1.2s infinite ease-in-out;
+        .loader-portal {
+            width: 70px;
+            height: 70px;
+            border: 3px solid rgba(0, 242, 254, 0.2);
+            border-top: 3px solid #00f2fe;
+            border-bottom: 3px solid #4facfe;
+            border-radius: 20px;
+            animation: cyberSpin 1.2s infinite cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.5);
         }
-
-        @keyframes dotBounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1.0); }
-        }
-
-        .dot-1 { animation: dotBounce 1.4s infinite ease-in-out both; animation-delay: -0.32s; }
-        .dot-2 { animation: dotBounce 1.4s infinite ease-in-out both; animation-delay: -0.16s; }
-        .dot-3 { animation: dotBounce 1.4s infinite ease-in-out both; }
 
         .page-section {
             display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
         }
 
         .page-section.active-page {
             display: block;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .text-gradient {
-            background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #b19ee7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .product-card {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .product-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(0, 210, 255, 0.5);
-            box-shadow: 0 10px 30px -10px rgba(0, 210, 255, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 242, 254, 0.7);
+            box-shadow: 0 20px 40px -10px rgba(0, 242, 254, 0.35);
         }
 
-        @keyframes vinylSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes floatOrb1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -50px) scale(1.2); }
         }
-        .animate-vinyl {
-            animation: vinylSpin 10s linear infinite;
+        @keyframes floatOrb2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-50px, 40px) scale(1.15); }
         }
+        .orb-1 { animation: floatOrb1 8s infinite ease-in-out; }
+        .orb-2 { animation: floatOrb2 10s infinite ease-in-out; }
     </style>
 </head>
 <body class="selection:bg-neonBlue selection:text-darkBg min-h-screen flex flex-col justify-between">
 
-    <!-- Modern Page Transition Loader Overlay -->
+    <!-- Futuristic Transition Loader -->
     <div id="page-transition-overlay" class="active">
-        <div class="loader-icon w-16 h-16 rounded-2xl bg-gradient-to-tr from-electricBlue to-neonBlue flex items-center justify-center shadow-neon mb-6 overflow-hidden">
-            <img src="https://i.ibb.co.com/HfnZ81rr/profile.png" alt="Loader Logo" class="w-full h-full object-cover">
+        <div class="loader-portal mb-6 flex items-center justify-center">
+            <i class="fa-solid fa-cube text-neonBlue text-xl animate-pulse"></i>
         </div>
-        <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 bg-neonBlue rounded-full dot-1"></span>
-            <span class="w-2.5 h-2.5 bg-neonBlue rounded-full dot-2"></span>
-            <span class="w-2.5 h-2.5 bg-neonBlue rounded-full dot-3"></span>
+        <p class="text-xs font-extrabold text-neonBlue tracking-[0.2em] uppercase mb-2">SYSTEM INITIALIZING...</p>
+        <div class="w-36 h-1 bg-slate-800 rounded-full overflow-hidden">
+            <div class="w-full h-full bg-gradient-to-r from-neonBlue to-electricBlue animate-[pulse_1s_infinite]"></div>
         </div>
     </div>
 
-    <!-- Ambient Lighting -->
-    <div class="fixed top-20 left-10 w-80 h-80 bg-neonBlue/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="fixed bottom-10 right-10 w-96 h-96 bg-electricBlue/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <!-- Background Orbs -->
+    <div class="fixed top-12 left-10 w-96 h-96 bg-neonBlue/10 rounded-full blur-[160px] pointer-events-none orb-1"></div>
+    <div class="fixed bottom-10 right-10 w-96 h-96 bg-electricBlue/10 rounded-full blur-[180px] pointer-events-none orb-2"></div>
 
     <!-- HEADER / NAVBAR -->
     <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#" onclick="switchPage('home', event)" class="text-2xl font-extrabold tracking-tight flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electricBlue to-neonBlue p-[2px] shadow-neon group-hover:scale-105 transition-transform overflow-hidden">
-                    <img src="https://i.ibb.co.com/HfnZ81rr/profile.png" alt="Logo Reii" class="w-full h-full object-cover rounded-xl">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electricBlue to-neonBlue p-[2px] shadow-neon group-hover:scale-110 transition-transform flex items-center justify-center">
+                    <i class="fa-solid fa-cube text-darkBg text-lg font-black"></i>
                 </div>
                 <span class="text-gradient tracking-wide">Reii Store</span>
             </a>
 
-            <!-- Navigation Menu (Desktop) - Warna putih default, biru hanya saat aktif -->
+            <!-- Navigation Menu (Desktop) -->
             <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
                 <a href="#" onclick="switchPage('home', event)" class="nav-link text-neonBlue font-semibold transition-colors" data-target="home">Home</a>
+                <a href="#" onclick="switchPage('dashboard', event)" class="nav-link text-slate-100 hover:text-neonBlue transition-colors flex items-center gap-1.5" data-target="dashboard">
+                    <i class="fa-solid fa-chart-pie text-xs text-neonBlue"></i> Dashboard
+                </a>
                 <a href="#" onclick="switchPage('products', event)" class="nav-link text-slate-100 hover:text-neonBlue transition-colors" data-target="products">Products</a>
                 <a href="#" onclick="switchPage('features', event)" class="nav-link text-slate-100 hover:text-neonBlue transition-colors" data-target="features">Features</a>
                 <a href="#" onclick="switchPage('paidedit', event)" class="nav-link text-slate-100 hover:text-neonBlue transition-colors flex items-center gap-1.5" data-target="paidedit">
                     <i class="fa-solid fa-wand-magic-sparkles text-xs"></i> Paid Edit
                 </a>
-                <a href="#" onclick="switchPage('music', event)" class="nav-link text-slate-100 hover:text-neonBlue transition-colors flex items-center gap-1.5" data-target="music">
-                    <i class="fa-solid fa-music text-xs animate-bounce"></i> Musik
-                </a>
                 <a href="#" onclick="switchPage('testimonials', event)" class="nav-link text-slate-100 hover:text-neonBlue transition-colors" data-target="testimonials">Testimonials</a>
                 <a href="#" onclick="switchPage('faq', event)" class="nav-link text-slate-100 hover:text-neonBlue transition-colors" data-target="faq">FAQ</a>
             </nav>
 
-            <!-- Right Navbar: WhatsApp & Profile Photo -->
+            <!-- Right Navbar: Keranjang, WA & Avatar -->
             <div class="hidden md:flex items-center gap-4">
-                <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20bertanya%20mengenai%20aplikasi%20premium" target="_blank" onclick="playClickSound()" class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold flex items-center gap-2 hover:bg-emerald-500/20 shadow-lg transition-all">
+                <button onclick="openCartModal(); playClickSound();" class="relative px-3.5 py-2.5 rounded-xl glass-panel border border-neonBlue/30 text-neonBlue hover:bg-neonBlue/10 transition flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-sm"></i>
+                    <span class="text-xs font-bold">Keranjang</span>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg font-extrabold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-neon">0</span>
+                </button>
+
+                <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20bertanya%20mengenai%20aplikasi%20premium" target="_blank" onclick="playClickSound()" class="px-4 py-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold flex items-center gap-2 hover:bg-emerald-500/20 shadow-lg transition-all">
                     <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Admin
                 </a>
+                
                 <div class="flex items-center gap-2 pl-2 border-l border-slate-800">
-                    <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-r from-neonBlue to-electricBlue shadow-neon overflow-hidden">
-                        <img src="https://i.ibb.co.com/HfnZ81rr/profile.png" alt="Avatar User" class="w-full h-full object-cover rounded-full">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electricBlue to-neonBlue p-[2px] shadow-neon flex items-center justify-center">
+                        <div class="w-full h-full bg-darkCard rounded-[10px] flex items-center justify-center">
+                            <i class="fa-solid fa-user-astronaut text-neonBlue text-sm"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -188,20 +205,27 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-neonBlue/10 px-6 py-6 space-y-4">
-            <div class="flex items-center gap-3 pb-4 border-b border-slate-800">
-                <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-r from-neonBlue to-electricBlue shadow-neon overflow-hidden">
-                    <img src="https://i.ibb.co.com/HfnZ81rr/profile.png" alt="Avatar User" class="w-full h-full object-cover rounded-full">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electricBlue to-neonBlue p-[2px] shadow-neon flex items-center justify-center">
+                        <div class="w-full h-full bg-darkCard rounded-[10px] flex items-center justify-center">
+                            <i class="fa-solid fa-user-astronaut text-neonBlue text-sm"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white">Reii System Node</h4>
+                        <p class="text-xs text-neonBlue flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Online Active</p>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="text-sm font-bold text-white">Reii Owner</h4>
-                    <p class="text-xs text-neonBlue">Online</p>
-                </div>
+                <button onclick="openCartModal(); playClickSound(); toggleMobileMenu();" class="relative px-3 py-2 rounded-xl glass-panel border border-neonBlue/30 text-neonBlue text-xs font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-cart-shopping"></i> <span id="mobile-cart-badge">0</span>
+                </button>
             </div>
             <a href="#" onclick="switchPage('home', event); toggleMobileMenu();" class="block text-neonBlue font-semibold">Home</a>
+            <a href="#" onclick="switchPage('dashboard', event); toggleMobileMenu();" class="block text-slate-100 hover:text-neonBlue flex items-center gap-2"><i class="fa-solid fa-chart-pie text-neonBlue"></i> Dashboard</a>
             <a href="#" onclick="switchPage('products', event); toggleMobileMenu();" class="block text-slate-100 hover:text-neonBlue">Products</a>
             <a href="#" onclick="switchPage('features', event); toggleMobileMenu();" class="block text-slate-100 hover:text-neonBlue">Features</a>
             <a href="#" onclick="switchPage('paidedit', event); toggleMobileMenu();" class="block text-slate-100 hover:text-neonBlue flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-neonBlue"></i> Paid Edit</a>
-            <a href="#" onclick="switchPage('music', event); toggleMobileMenu();" class="block text-slate-100 hover:text-neonBlue flex items-center gap-2"><i class="fa-solid fa-music text-neonBlue"></i> Musik</a>
             <a href="#" onclick="switchPage('testimonials', event); toggleMobileMenu();" class="block text-slate-100 hover:text-neonBlue">Testimonials</a>
             <a href="#" onclick="switchPage('faq', event); toggleMobileMenu();" class="block text-slate-100 hover:text-neonBlue">FAQ</a>
             <div class="pt-4 border-t border-slate-800">
@@ -219,18 +243,18 @@
         <section id="page-home" class="page-section active-page">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[70vh]">
                 <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-neonBlue/30 text-xs font-semibold text-neonBlue shadow-neon">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-panel border border-neonBlue/30 text-xs font-semibold text-neonBlue shadow-neon">
                         <span class="flex h-2 w-2 rounded-full bg-neonBlue animate-ping"></span>
-                        Official Trusted Premium Store #1
+                        Next-Gen Digital Store & Hub v3.0
                     </div>
 
                     <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.1]">
                         Unlock Premium Apps, <br class="hidden sm:inline">
-                        <span class="text-gradient drop-shadow-[0_0_20px_rgba(0,210,255,0.3)]">Limitless Experience.</span>
+                        <span class="text-gradient drop-shadow-[0_0_25px_rgba(0,242,254,0.4)]">Limitless Experience.</span>
                     </h1>
 
                     <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                        Dapatkan akses aplikasi premium terbaik, terpercaya, dan bergaransi resmi hanya di Reii Store. Nikmati produktivitas dan hiburan tanpa batas dengan harga terjangkau.
+                        Akses layanan digital premium bergaransi resmi dengan teknologi pemrosesan instan. Rasakan kecepatan dan kemudahan bertransaksi di Reii Store.
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
@@ -260,31 +284,139 @@
                     </div>
                 </div>
 
-                <!-- Kartu Identitas Resmi Reii Store (Logo Petir diganti Foto Profil) -->
+                <!-- Kartu Identitas Resmi & Avatar Modern -->
                 <div class="lg:col-span-5 relative flex justify-center items-center">
-                    <div class="absolute w-72 h-72 bg-neonBlue/20 rounded-full blur-[80px] pointer-events-none"></div>
+                    <div class="absolute w-72 h-72 bg-neonBlue/20 rounded-full blur-[90px] pointer-events-none"></div>
                     
                     <div class="relative w-full max-w-sm glass-panel p-8 rounded-3xl border border-neonBlue/40 shadow-2xl space-y-6 text-center group">
-                        <div class="w-24 h-24 mx-auto rounded-2xl p-[3px] bg-gradient-to-tr from-electricBlue to-neonBlue shadow-neon group-hover:scale-110 transition-transform overflow-hidden">
-                            <img src="https://i.ibb.co.com/HfnZ81rr/profile.png" alt="Profile Reii Store" class="w-full h-full object-cover rounded-xl">
+                        <div class="w-24 h-24 mx-auto rounded-2xl p-[3px] bg-gradient-to-tr from-electricBlue to-neonBlue shadow-neon group-hover:scale-110 transition-transform flex items-center justify-center">
+                            <div class="w-full h-full bg-darkCard rounded-[14px] flex items-center justify-center relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-neonBlue/10 to-transparent"></div>
+                                <i class="fa-solid fa-shield-halved text-neonBlue text-4xl animate-pulse"></i>
+                            </div>
                         </div>
                         <div>
                             <h3 class="text-2xl font-extrabold text-white tracking-wide">REII STORE</h3>
-                            <p class="text-xs text-neonBlue font-semibold uppercase tracking-widest mt-1">Authorized Digital Hub</p>
+                            <p class="text-xs text-neonBlue font-semibold uppercase tracking-widest mt-1">Next-Gen Digital Hub</p>
                         </div>
                         <p class="text-xs text-slate-400 leading-relaxed px-4">
                             Pusat layanan akun premium tercepat, terlegalitas, dan dilindungi garansi penuh 100% tanpa ribet.
                         </p>
                         <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                            <span>Status: <strong class="text-emerald-400">Verified Secure</strong></span>
-                            <span class="text-neonBlue font-semibold">Reii Owner Hub</span>
+                            <span>System Status: <strong class="text-emerald-400">Secure</strong></span>
+                            <span class="text-neonBlue font-semibold">Node #01</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- HALAMAN 2: PRODUCTS -->
+        <!-- HALAMAN DASHBOARD -->
+        <section id="page-dashboard" class="page-section">
+            <div class="max-w-6xl mx-auto space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 glass-panel p-6 rounded-3xl border border-neonBlue/30 shadow-neon">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-neonBlue/20 to-electricBlue/20 flex items-center justify-center border border-neonBlue/40">
+                            <i class="fa-solid fa-chart-line text-neonBlue text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-extrabold text-white tracking-tight">Store Performance Dashboard</h2>
+                            <p class="text-xs text-slate-400">Real-time telemetry dan status sistem operasional Reii Store.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span> Live Server Operational
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-panel p-6 rounded-3xl border border-slate-800 hover:border-neonBlue/50 transition-all group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold text-slate-400">Item di Keranjang</span>
+                            <div class="w-10 h-10 rounded-xl bg-neonBlue/10 text-neonBlue flex items-center justify-center text-lg"><i class="fa-solid fa-cart-shopping"></i></div>
+                        </div>
+                        <h3 id="dash-cart-count" class="text-3xl font-extrabold text-white mb-1">0</h3>
+                        <p class="text-[11px] text-neonBlue font-semibold"><i class="fa-solid fa-basket-shopping mr-1"></i> Siap Checkout</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-3xl border border-slate-800 hover:border-neonBlue/50 transition-all group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold text-slate-400">Garansi Aktif</span>
+                            <div class="w-10 h-10 rounded-xl bg-neonBlue/10 text-neonBlue flex items-center justify-center text-lg"><i class="fa-solid fa-shield-check"></i></div>
+                        </div>
+                        <h3 class="text-3xl font-extrabold text-white mb-1">99.9%</h3>
+                        <p class="text-[11px] text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check mr-1"></i> Stabil & Terlindungi</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-3xl border border-slate-800 hover:border-neonBlue/50 transition-all group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold text-slate-400">Respon Admin</span>
+                            <div class="w-10 h-10 rounded-xl bg-neonBlue/10 text-neonBlue flex items-center justify-center text-lg"><i class="fa-solid fa-bolt"></i></div>
+                        </div>
+                        <h3 class="text-3xl font-extrabold text-white mb-1">&lt; 3 Min</h3>
+                        <p class="text-[11px] text-emerald-400 font-semibold"><i class="fa-solid fa-clock mr-1"></i> Sangat Cepat (Fast Resp)</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-3xl border border-slate-800 hover:border-neonBlue/50 transition-all group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold text-slate-400">Produk Tersedia</span>
+                            <div class="w-10 h-10 rounded-xl bg-neonBlue/10 text-neonBlue flex items-center justify-center text-lg"><i class="fa-solid fa-box-archive"></i></div>
+                        </div>
+                        <h3 class="text-3xl font-extrabold text-white mb-1">8 Items</h3>
+                        <p class="text-[11px] text-slate-400 font-semibold"><i class="fa-solid fa-star mr-1 text-amber-400"></i> Premium Quality</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-8 glass-panel p-8 rounded-3xl border border-slate-800 space-y-6">
+                        <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-terminal text-neonBlue"></i> Quick Store Actions
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Pilih pintasan cepat di bawah ini untuk langsung terhubung ke layanan utama atau melakukan pemesanan instan.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20order%20kilat" target="_blank" onclick="playClickSound()" class="p-4 rounded-2xl bg-darkCard border border-neonBlue/30 hover:border-neonBlue hover:bg-neonBlue/5 transition flex flex-col items-center text-center gap-2 group">
+                                <i class="fa-brands fa-whatsapp text-emerald-400 text-2xl group-hover:scale-110 transition-transform"></i>
+                                <span class="text-xs font-bold text-white">Order Kilat WA</span>
+                            </a>
+                            <button onclick="switchPage('products', event)" class="p-4 rounded-2xl bg-darkCard border border-neonBlue/30 hover:border-neonBlue hover:bg-neonBlue/5 transition flex flex-col items-center text-center gap-2 group">
+                                <i class="fa-solid fa-store text-neonBlue text-2xl group-hover:scale-110 transition-transform"></i>
+                                <span class="text-xs font-bold text-white">Lihat Katalog</span>
+                            </button>
+                            <a href="https://www.instagram.com/reiiramdanii_?mdxt=NnlpYm8xaGR5eG45" target="_blank" onclick="playClickSound()" class="p-4 rounded-2xl bg-darkCard border border-neonBlue/30 hover:border-neonBlue hover:bg-neonBlue/5 transition flex flex-col items-center text-center gap-2 group">
+                                <i class="fa-brands fa-instagram text-pink-400 text-2xl group-hover:scale-110 transition-transform"></i>
+                                <span class="text-xs font-bold text-white">Instagram Resmi</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4 glass-panel p-8 rounded-3xl border border-slate-800 space-y-4">
+                        <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-shield-cat text-neonBlue"></i> Security Hub
+                        </h3>
+                        <div class="space-y-3 text-xs text-slate-300">
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-darkCard border border-slate-800">
+                                <span>SSL Encryption</span>
+                                <span class="text-emerald-400 font-bold">Active</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-darkCard border border-slate-800">
+                                <span>Garansi Klaim</span>
+                                <span class="text-neonBlue font-bold">100% Instant</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-darkCard border border-slate-800">
+                                <span>Payment Gate</span>
+                                <span class="text-purple-400 font-bold">QRIS / E-Wallet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN 2: PRODUCTS (TANPA TOMBOL INFO, HARGA SESUAI PERMINTAAN) -->
         <section id="page-products" class="page-section">
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-neonBlue/20 text-xs font-semibold text-neonBlue">
@@ -294,7 +426,7 @@
                     Produk Premium & <span class="text-gradient">Terlaris</span>
                 </h2>
                 <p class="text-slate-400 text-sm sm:text-base">
-                    Pilih aplikasi favoritmu di bawah ini dan klik Beli Sekarang untuk order instan via WhatsApp, atau cek rincian harga lengkap melalui tombol Deskripsi Apk.
+                    Pilih aplikasi favoritmu di bawah ini, masukkan ke keranjang atau beli langsung via WhatsApp.
                 </p>
             </div>
 
@@ -310,13 +442,13 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-6">Tanpa iklan, bebas skip, kualitas audio tertinggi, akun legal 1 Bulan.</p>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 55.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 17.000</span></div>
+                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 55.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 20.000</span></div>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openDescModal('spotify')" class="py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-neonBlue"></i> Deskripsi Apk
+                            <button onclick="addToCart('Spotify Premium', 20000)" class="py-2.5 rounded-xl bg-neonBlue/10 hover:bg-neonBlue/20 text-neonBlue text-xs font-bold border border-neonBlue/30 transition flex items-center justify-center gap-1.5" title="Tambah Keranjang">
+                                <i class="fa-solid fa-cart-plus"></i> +Keranjang
                             </button>
                             <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20membeli%20Spotify%20Premium" target="_blank" onclick="playClickSound()" class="py-2.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg text-xs font-bold flex items-center justify-center gap-1.5 shadow-neon hover:opacity-90 transition">
-                                <span>Beli</span> <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Beli</span> <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
@@ -333,13 +465,13 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-6">Template premium tak terbatas, hapus background, cloud besar (1 Tahun).</p>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 120.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 1.000</span></div>
+                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 120.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 5.000</span></div>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openDescModal('canva')" class="py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-neonBlue"></i> Deskripsi Apk
+                            <button onclick="addToCart('Canva Pro Team', 5000)" class="py-2.5 rounded-xl bg-neonBlue/10 hover:bg-neonBlue/20 text-neonBlue text-xs font-bold border border-neonBlue/30 transition flex items-center justify-center gap-1.5" title="Tambah Keranjang">
+                                <i class="fa-solid fa-cart-plus"></i> +Keranjang
                             </button>
                             <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20membeli%20Canva%20Pro" target="_blank" onclick="playClickSound()" class="py-2.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg text-xs font-bold flex items-center justify-center gap-1.5 shadow-neon hover:opacity-90 transition">
-                                <span>Beli</span> <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Beli</span> <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
@@ -356,13 +488,13 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-6">Buka semua efek visual pro, tanpa watermark, preset melimpah 1 Bulan.</p>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 45.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 8.000</span></div>
+                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 45.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 10.000</span></div>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openDescModal('alightmotion')" class="py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-neonBlue"></i> Deskripsi Apk
+                            <button onclick="addToCart('Alight Motion Pro', 10000)" class="py-2.5 rounded-xl bg-neonBlue/10 hover:bg-neonBlue/20 text-neonBlue text-xs font-bold border border-neonBlue/30 transition flex items-center justify-center gap-1.5" title="Tambah Keranjang">
+                                <i class="fa-solid fa-cart-plus"></i> +Keranjang
                             </button>
                             <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20membeli%20Alight%20Motion%20Pro" target="_blank" onclick="playClickSound()" class="py-2.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg text-xs font-bold flex items-center justify-center gap-1.5 shadow-neon hover:opacity-90 transition">
-                                <span>Beli</span> <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Beli</span> <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
@@ -381,11 +513,11 @@
                     <div class="space-y-2">
                         <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 120.000</span><span class="text-xl font-extrabold text-neonBlue">Tanya Admin</span></div>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openDescModal('netflix')" class="py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-neonBlue"></i> Deskripsi Apk
+                            <button onclick="addToCart('Netflix Premium UHD', 0)" class="py-2.5 rounded-xl bg-neonBlue/10 hover:bg-neonBlue/20 text-neonBlue text-xs font-bold border border-neonBlue/30 transition flex items-center justify-center gap-1.5" title="Tambah Keranjang">
+                                <i class="fa-solid fa-cart-plus"></i> +Keranjang
                             </button>
                             <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20membeli%20Netflix%20Premium" target="_blank" onclick="playClickSound()" class="py-2.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg text-xs font-bold flex items-center justify-center gap-1.5 shadow-neon hover:opacity-90 transition">
-                                <span>Beli</span> <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Beli</span> <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
@@ -402,13 +534,13 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-6">Buka semua efek pro, template eksklusif, transisi mewah, fitur AI 1 Bulan.</p>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 80.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 8.000</span></div>
+                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 80.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 20.000</span></div>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openDescModal('capcut')" class="py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-neonBlue"></i> Deskripsi Apk
+                            <button onclick="addToCart('CapCut Pro', 20000)" class="py-2.5 rounded-xl bg-neonBlue/10 hover:bg-neonBlue/20 text-neonBlue text-xs font-bold border border-neonBlue/30 transition flex items-center justify-center gap-1.5" title="Tambah Keranjang">
+                                <i class="fa-solid fa-cart-plus"></i> +Keranjang
                             </button>
                             <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20membeli%20CapCut%20Pro" target="_blank" onclick="playClickSound()" class="py-2.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg text-xs font-bold flex items-center justify-center gap-1.5 shadow-neon hover:opacity-90 transition">
-                                <span>Beli</span> <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Beli</span> <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
@@ -425,13 +557,13 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-6">Nonton video bebas iklan total, putar di latar belakang, YouTube Music 1 Bulan.</p>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 65.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 5.000</span></div>
+                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 65.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 10.000</span></div>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openDescModal('youtube')" class="py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-neonBlue"></i> Deskripsi Apk
+                            <button onclick="addToCart('YouTube Premium', 10000)" class="py-2.5 rounded-xl bg-neonBlue/10 hover:bg-neonBlue/20 text-neonBlue text-xs font-bold border border-neonBlue/30 transition flex items-center justify-center gap-1.5" title="Tambah Keranjang">
+                                <i class="fa-solid fa-cart-plus"></i> +Keranjang
                             </button>
                             <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20membeli%20YouTube%20Premium" target="_blank" onclick="playClickSound()" class="py-2.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg text-xs font-bold flex items-center justify-center gap-1.5 shadow-neon hover:opacity-90 transition">
-                                <span>Beli</span> <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Beli</span> <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
@@ -448,13 +580,13 @@
                         <p class="text-xs text-slate-400 leading-relaxed mb-6">Aplikasi AI perbaikan kualitas video buram, jernihkan wajah, stabilkan video 1 Bulan.</p>
                     </div>
                     <div class="space-y-2">
-                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 50.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 3.000</span></div>
+                        <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 50.000</span><span class="text-xl font-extrabold text-neonBlue">Rp 10.000</span></div>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openDescModal('wink')" class="py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-neonBlue"></i> Deskripsi Apk
+                            <button onclick="addToCart('Wink VIP', 10000)" class="py-2.5 rounded-xl bg-neonBlue/10 hover:bg-neonBlue/20 text-neonBlue text-xs font-bold border border-neonBlue/30 transition flex items-center justify-center gap-1.5" title="Tambah Keranjang">
+                                <i class="fa-solid fa-cart-plus"></i> +Keranjang
                             </button>
                             <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20membeli%20Wink%20VIP" target="_blank" onclick="playClickSound()" class="py-2.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg text-xs font-bold flex items-center justify-center gap-1.5 shadow-neon hover:opacity-90 transition">
-                                <span>Beli</span> <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Beli</span> <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
@@ -473,11 +605,11 @@
                     <div class="space-y-2">
                         <div class="flex items-baseline gap-2 mb-2"><span class="text-xs text-slate-500 line-through">Rp 300.000</span><span class="text-xl font-extrabold text-neonBlue">Tanya Admin</span></div>
                         <div class="grid grid-cols-2 gap-2">
-                            <button onclick="openDescModal('chatgpt')" class="py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center justify-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-neonBlue"></i> Deskripsi Apk
+                            <button onclick="addToCart('ChatGPT Plus', 0)" class="py-2.5 rounded-xl bg-neonBlue/10 hover:bg-neonBlue/20 text-neonBlue text-xs font-bold border border-neonBlue/30 transition flex items-center justify-center gap-1.5" title="Tambah Keranjang">
+                                <i class="fa-solid fa-cart-plus"></i> +Keranjang
                             </button>
                             <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store,%20saya%20ingin%20membeli%20ChatGPT%20Plus" target="_blank" onclick="playClickSound()" class="py-2.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg text-xs font-bold flex items-center justify-center gap-1.5 shadow-neon hover:opacity-90 transition">
-                                <span>Beli</span> <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Beli</span> <i class="fa-brands fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
@@ -623,189 +755,105 @@
             </div>
         </section>
 
-        <!-- HALAMAN 5: MUSIK -->
-        <section id="page-music" class="page-section">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center space-y-4 mb-10">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-neonBlue/20 text-xs font-semibold text-neonBlue">
-                        <i class="fa-solid fa-music text-neonBlue animate-pulse"></i> Online Music Station
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
-                        Dengar <span class="text-gradient">Musik</span> Online
-                    </h2>
-                    <p class="text-slate-400 text-sm">
-                        Nikmati deretan musik pilihan secara streaming langsung di Reii Store.
-                    </p>
-                </div>
-
-                <!-- Music Player Main Box -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center glass-panel p-6 sm:p-8 rounded-3xl border border-neonBlue/30 shadow-2xl mb-8">
-                    <!-- Album Art Vinyl Animation -->
-                    <div class="md:col-span-5 flex flex-col items-center justify-center text-center">
-                        <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-gradient-to-tr from-electricBlue to-neonBlue p-1 shadow-neon mb-4">
-                            <div id="vinyl-disc" class="w-full h-full rounded-full bg-darkBg flex items-center justify-center border-4 border-slate-900 overflow-hidden relative">
-                                <!-- Vinyl grooves -->
-                                <div class="absolute inset-4 rounded-full border border-slate-800"></div>
-                                <div class="absolute inset-8 rounded-full border border-slate-800"></div>
-                                <div class="absolute inset-12 rounded-full border border-slate-800"></div>
-                                <!-- Center Artist Photo -->
-                                <div class="w-16 h-16 rounded-full bg-neonBlue/20 border-2 border-neonBlue overflow-hidden z-10 flex items-center justify-center">
-                                    <i class="fa-solid fa-compact-disc text-neonBlue text-xl animate-spin"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 id="current-song-title" class="text-lg font-bold text-white truncate max-w-[240px]">Lagu Santai Chill</h3>
-                        <p id="current-song-artist" class="text-xs text-neonBlue font-medium">Reii Audio Station</p>
-                    </div>
-
-                    <!-- Player Controls & Playlist Selector -->
-                    <div class="md:col-span-7 space-y-6">
-                        <!-- Progress Bar -->
-                        <div class="space-y-2">
-                            <div class="flex justify-between text-xs text-slate-400">
-                                <span id="current-time">0:00</span>
-                                <span id="duration">3:45</span>
-                            </div>
-                            <input type="range" id="progress-bar" value="0" max="100" class="w-full accent-neonBlue cursor-pointer bg-slate-800 h-2 rounded-lg">
-                        </div>
-
-                        <!-- Main Buttons -->
-                        <div class="flex items-center justify-center gap-6">
-                            <button onclick="prevSong(); playClickSound();" class="w-12 h-12 rounded-full bg-slate-800/80 hover:bg-slate-700 text-white flex items-center justify-center transition shadow-md">
-                                <i class="fa-solid fa-backward-step"></i>
-                            </button>
-                            <button id="play-pause-btn" onclick="togglePlay(); playClickSound();" class="w-16 h-16 rounded-full bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg text-xl font-bold flex items-center justify-center shadow-neon hover:scale-105 transition">
-                                <i id="play-icon" class="fa-solid fa-play ml-0.5"></i>
-                            </button>
-                            <button onclick="nextSong(); playClickSound();" class="w-12 h-12 rounded-full bg-slate-800/80 hover:bg-slate-700 text-white flex items-center justify-center transition shadow-md">
-                                <i class="fa-solid fa-forward-step"></i>
-                            </button>
-                        </div>
-
-                        <!-- Playlist Daftar Musik Online -->
-                        <div class="space-y-2 pt-4 border-t border-slate-800">
-                            <span class="text-xs font-bold text-slate-300 block mb-2"><i class="fa-solid fa-list-ul mr-1.5 text-neonBlue"></i> Playlist Musik:</span>
-                            <div class="space-y-2 max-h-48 overflow-y-auto pr-1">
-                                <div onclick="selectSong(0)" class="song-item p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-neonBlue/50 cursor-pointer flex items-center justify-between transition group">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-lg bg-neonBlue/10 text-neonBlue flex items-center justify-center text-xs font-bold">1</div>
-                                        <div>
-                                            <h4 class="text-xs font-bold text-white group-hover:text-neonBlue transition">Lagu Santai Chill</h4>
-                                            <p class="text-[10px] text-slate-400">Reii Audio Station</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-neonBlue font-semibold play-indicator hidden"><i class="fa-solid fa-volume-high"></i></span>
-                                </div>
-                                <div onclick="selectSong(1)" class="song-item p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-neonBlue/50 cursor-pointer flex items-center justify-between transition group">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-lg bg-neonBlue/10 text-neonBlue flex items-center justify-center text-xs font-bold">2</div>
-                                        <div>
-                                            <h4 class="text-xs font-bold text-white group-hover:text-neonBlue transition">Akustik Malam</h4>
-                                            <p class="text-[10px] text-slate-400">Acoustic Session</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-neonBlue font-semibold play-indicator hidden"><i class="fa-solid fa-volume-high"></i></span>
-                                </div>
-                                <div onclick="selectSong(2)" class="song-item p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-neonBlue/50 cursor-pointer flex items-center justify-between transition group">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-lg bg-neonBlue/10 text-neonBlue flex items-center justify-center text-xs font-bold">3</div>
-                                        <div>
-                                            <h4 class="text-xs font-bold text-white group-hover:text-neonBlue transition">Lofi Beats to Relax</h4>
-                                            <p class="text-[10px] text-slate-400">Lofi Vibes</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-neonBlue font-semibold play-indicator hidden"><i class="fa-solid fa-volume-high"></i></span>
-                                </div>
-                                <div onclick="selectSong(3)" class="song-item p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-neonBlue/50 cursor-pointer flex items-center justify-between transition group">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-lg bg-neonBlue/10 text-neonBlue flex items-center justify-center text-xs font-bold">4</div>
-                                        <div>
-                                            <h4 class="text-xs font-bold text-white group-hover:text-neonBlue transition">Ambient Peaceful</h4>
-                                            <p class="text-[10px] text-slate-400">Calm Sound</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-neonBlue font-semibold play-indicator hidden"><i class="fa-solid fa-volume-high"></i></span>
-                                </div>
-                                <div onclick="selectSong(4)" class="song-item p-3 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-neonBlue/50 cursor-pointer flex items-center justify-between transition group">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-lg bg-neonBlue/10 text-neonBlue flex items-center justify-center text-xs font-bold">5</div>
-                                        <div>
-                                            <h4 class="text-xs font-bold text-white group-hover:text-neonBlue transition">Morning Sunshine</h4>
-                                            <p class="text-[10px] text-slate-400">Upbeat Melodies</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-xs text-neonBlue font-semibold play-indicator hidden"><i class="fa-solid fa-volume-high"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- HALAMAN 6: TESTIMONIALS -->
+        <!-- HALAMAN 5: TESTIMONIALS & ULASAN TERPERCAYA -->
         <section id="page-testimonials" class="page-section">
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-neonBlue/20 text-xs font-semibold text-neonBlue">
-                    <i class="fa-solid fa-star text-neonBlue"></i> Testimoni Pembeli
+                    <i class="fa-solid fa-shield-check text-neonBlue"></i> Penilaian & Ulasan Terpercaya
                 </div>
                 <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                    Apa Kata <span class="text-gradient">Pelanggan Kami?</span>
+                    Bukti Kepercayaan <span class="text-gradient">Pelanggan Reii Store</span>
                 </h2>
                 <p class="text-slate-400 text-sm sm:text-base">
-                    Ribuan ulasan positif dari pelanggan setia yang telah merasakan kemudahan di Reii Store.
+                    Seperti Shopee & TikTok Shop, kami transparan menampilkan ulasan asli dari ribuan pelanggan yang telah membuktikan kecepatan dan garansi kami.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
-                    <div class="space-y-4">
-                        <div class="flex text-amber-400 text-sm gap-1">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-neonBlue/30 mb-12 max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 shadow-neon">
+                <div class="text-center sm:text-left space-y-2">
+                    <div class="text-4xl sm:text-5xl font-extrabold text-white">4.9 <span class="text-lg text-slate-400 font-normal">/ 5.0</span></div>
+                    <div class="flex text-amber-400 text-sm justify-center sm:justify-start gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-slate-400">Dari 15,480+ Total Penilaian & Ulasan Sukses</p>
+                </div>
+                <div class="w-full sm:w-auto flex flex-col gap-3">
+                    <button onclick="openReviewModal()" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg font-bold text-sm shadow-neon hover:opacity-90 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-pen-to-square"></i> Tulis Ulasan Anda
+                    </button>
+                    <div class="text-center text-[11px] text-emerald-400 font-semibold">
+                        <i class="fa-solid fa-circle-check"></i> 100% Pembeli Terverifikasi
+                    </div>
+                </div>
+            </div>
+
+            <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800 flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 text-xs gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold"><i class="fa-solid fa-check"></i> Terverifikasi</span>
                         </div>
-                        <p class="text-sm text-slate-300 leading-relaxed">
-                            "Beli Spotify Premium di Reii Store gak ada 5 menit langsung aktif! Adminnya ramah banget dan fast response via WhatsApp."
+                        <p class="text-xs text-slate-300 leading-relaxed italic">
+                            "Beli Spotify Premium di Reii Store gak ada 3 menit langsung aktif! Adminnya ramah banget dan fast response via WhatsApp. Amanah banget!"
                         </p>
                     </div>
-                    <div class="flex items-center gap-4 pt-6 mt-6 border-t border-slate-800">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-neonBlue to-electricBlue flex items-center justify-center font-bold text-darkBg text-sm">AR</div>
-                        <div><h4 class="text-sm font-bold text-white">Andika Pratama</h4><p class="text-xs text-slate-400">Jakarta</p></div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-800 text-xs">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-neonBlue/20 text-neonBlue flex items-center justify-center font-bold">AP</div>
+                            <div><h4 class="font-bold text-white">Andika Pratama</h4><p class="text-[10px] text-slate-400">Spotify Premium</p></div>
+                        </div>
+                        <span class="text-[10px] text-slate-500">Kemarin</span>
                     </div>
                 </div>
 
-                <div class="glass-panel p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
-                    <div class="space-y-4">
-                        <div class="flex text-amber-400 text-sm gap-1">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800 flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 text-xs gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold"><i class="fa-solid fa-check"></i> Terverifikasi</span>
                         </div>
-                        <p class="text-sm text-slate-300 leading-relaxed">
-                            "Canva Pro teamnya awet banget udah 6 bulan lebih gak pernah kendala. Harganya super murah. Mantap Reii Store!"
+                        <p class="text-xs text-slate-300 leading-relaxed italic">
+                            "Canva Pro teamnya awet banget udah berbulan-bulan gak pernah kendala. Harganya super murah. Trusted seller pokoknya!"
                         </p>
                     </div>
-                    <div class="flex items-center gap-4 pt-6 mt-6 border-t border-slate-800">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-neonBlue to-electricBlue flex items-center justify-center font-bold text-darkBg text-sm">SN</div>
-                        <div><h4 class="text-sm font-bold text-white">Siti Nurhaliza</h4><p class="text-xs text-slate-400">Bandung</p></div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-800 text-xs">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-neonBlue/20 text-neonBlue flex items-center justify-center font-bold">SN</div>
+                            <div><h4 class="font-bold text-white">Siti Nurhaliza</h4><p class="text-[10px] text-slate-400">Canva Pro Team</p></div>
+                        </div>
+                        <span class="text-[10px] text-slate-500">3 hari lalu</span>
                     </div>
                 </div>
 
-                <div class="glass-panel p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
-                    <div class="space-y-4">
-                        <div class="flex text-amber-400 text-sm gap-1">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800 flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 text-xs gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold"><i class="fa-solid fa-check"></i> Terverifikasi</span>
                         </div>
-                        <p class="text-sm text-slate-300 leading-relaxed">
-                            "ChatGPT Plus buat kerjaan skripsi sangat membantu. Proses order gampang langsung dikasih akun loginnya. Juara!"
+                        <p class="text-xs text-slate-300 leading-relaxed italic">
+                            "ChatGPT Plus buat keperluan tugas & skripsi sangat membantu. Proses order gampang langsung dikasih akun loginnya tanpa ribet. Juara!"
                         </p>
                     </div>
-                    <div class="flex items-center gap-4 pt-6 mt-6 border-t border-slate-800">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-neonBlue to-electricBlue flex items-center justify-center font-bold text-darkBg text-sm">RF</div>
-                        <div><h4 class="text-sm font-bold text-white">Rizky Fajar</h4><p class="text-xs text-slate-400">Surabaya</p></div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-800 text-xs">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-neonBlue/20 text-neonBlue flex items-center justify-center font-bold">RF</div>
+                            <div><h4 class="font-bold text-white">Rizky Fajar</h4><p class="text-[10px] text-slate-400">ChatGPT Plus</p></div>
+                        </div>
+                        <span class="text-[10px] text-slate-500">Seminggu lalu</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- HALAMAN 7: FAQ -->
+        <!-- HALAMAN 6: FAQ -->
         <section id="page-faq" class="page-section">
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-neonBlue/20 text-xs font-semibold text-neonBlue">
@@ -826,7 +874,7 @@
                         <i class="fa-solid fa-chevron-down text-neonBlue transition-transform"></i>
                     </button>
                     <div class="faq-content hidden px-6 pb-5 text-sm text-slate-400 leading-relaxed">
-                        Pilih aplikasi pada menu Products, klik tombol Beli Sekarang untuk terhubung langsung ke WhatsApp Admin (+6283165869029).
+                        Pilih aplikasi pada menu Products, klik tombol Beli atau Keranjang untuk melanjutkan transaksi via WhatsApp Admin (+6283165869029).
                     </div>
                 </div>
 
@@ -846,7 +894,7 @@
                         <i class="fa-solid fa-chevron-down text-neonBlue transition-transform"></i>
                     </button>
                     <div class="faq-content hidden px-6 pb-5 text-sm text-slate-400 leading-relaxed">
-                        Tersedia Transfer Bank (BCA, Mandiri, BNI), E-Wallet (GoPay, DANA, OVO, ShopeePay), dan QRIS instan.
+                        Tersedia Transfer Bank (BCA, Mandiri, BNI), E-Wallet (GoPay, Dana, OVO, ShopeePay), dan QRIS instan.
                     </div>
                 </div>
             </div>
@@ -854,31 +902,75 @@
 
     </main>
 
-    <!-- MODAL DESKRIPSI APK -->
-    <div id="descModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center px-4 hidden">
-        <div class="glass-panel border border-neonBlue/30 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeDescModal(); playClickSound();" class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center transition">
+    <!-- MODAL TULIS ULASAN -->
+    <div id="reviewModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center px-4 hidden">
+        <div class="glass-panel border border-neonBlue/30 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeReviewModal(); playClickSound();" class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center transition">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-electricBlue to-neonBlue flex items-center justify-center shadow-neon overflow-hidden">
-                    <img src="https://i.ibb.co.com/HfnZ81rr/profile.png" alt="Modal Logo" class="w-full h-full object-cover">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-electricBlue to-neonBlue flex items-center justify-center shadow-neon">
+                    <i class="fa-solid fa-pen text-darkBg text-xl font-bold"></i>
                 </div>
                 <div>
-                    <h3 class="text-lg font-extrabold text-white tracking-wide">DESKRIPSI APK & PRICE LIST</h3>
-                    <p class="text-xs text-neonBlue font-medium">Reii Store Official Catalog</p>
+                    <h3 class="text-lg font-extrabold text-white tracking-wide">TULIS ULASAN ANDA</h3>
+                    <p class="text-xs text-neonBlue font-medium">Bagikan pengalaman belanja di Reii Store</p>
                 </div>
             </div>
 
-            <!-- Konten Deskripsi Dinamis -->
-            <div id="descModalContent" class="text-xs text-slate-300 space-y-4 leading-relaxed font-sans bg-darkBg/60 p-5 rounded-2xl border border-slate-800">
+            <form id="reviewForm" onsubmit="submitReview(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Nama Lengkap / Panggilan</label>
+                    <input type="text" id="reviewName" required placeholder="Contoh: Dimas Saputra" class="w-full px-4 py-2.5 rounded-xl bg-darkCard border border-slate-800 text-white text-xs focus:border-neonBlue focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Produk yang Dibeli</label>
+                    <input type="text" id="reviewProduct" required placeholder="Contoh: Spotify Premium" class="w-full px-4 py-2.5 rounded-xl bg-darkCard border border-slate-800 text-white text-xs focus:border-neonBlue focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Pesan / Komentar Anda</label>
+                    <textarea id="reviewComment" rows="3" required placeholder="Tuliskan seberapa puas dan terpercayanya pelayanan Reii Store..." class="w-full px-4 py-2.5 rounded-xl bg-darkCard border border-slate-800 text-white text-xs focus:border-neonBlue focus:outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg font-bold text-sm shadow-neon hover:opacity-90 transition">
+                    Kirim Ulasan
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL KERANJANG BELANJA -->
+    <div id="cartModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center px-4 hidden">
+        <div class="glass-panel border border-neonBlue/30 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeCartModal(); playClickSound();" class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-electricBlue to-neonBlue flex items-center justify-center shadow-neon">
+                    <i class="fa-solid fa-cart-shopping text-darkBg text-xl font-bold"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-extrabold text-white tracking-wide">KERANJANG BELANJA</h3>
+                    <p class="text-xs text-neonBlue font-medium">Daftar pesanan produk pilihan Anda</p>
+                </div>
+            </div>
+
+            <div id="cart-items-container" class="space-y-3 max-h-60 overflow-y-auto pr-1 mb-6">
                 <!-- Diisi via JavaScript -->
             </div>
 
-            <div class="mt-6">
-                <button onclick="closeDescModal(); playClickSound();" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg font-bold text-sm shadow-neon hover:opacity-90 transition">
-                    Tutup
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between mb-6">
+                <span class="text-sm font-bold text-slate-300">Total Pembayaran:</span>
+                <span id="cart-total-price" class="text-lg font-extrabold text-neonBlue">Rp 0</span>
+            </div>
+
+            <div class="space-y-3">
+                <button onclick="checkoutCart()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-darkBg font-bold text-sm shadow-neon hover:opacity-90 transition flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Checkout Pesanan ke WhatsApp
+                </button>
+                <button onclick="clearCart()" class="w-full py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition">
+                    Kosongkan Keranjang
                 </button>
             </div>
         </div>
@@ -888,13 +980,12 @@
     <footer class="relative bg-darkBg border-t border-neonBlue/15 pt-12 pb-10 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-electricBlue to-neonBlue p-[2px] shadow-neon overflow-hidden">
-                    <img src="https://i.ibb.co.com/HfnZ81rr/profile.png" alt="Footer Logo" class="w-full h-full object-cover rounded-md">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-electricBlue to-neonBlue p-[2px] shadow-neon flex items-center justify-center">
+                    <i class="fa-solid fa-cube text-darkBg text-xs font-black"></i>
                 </div>
                 <span class="text-sm font-extrabold text-white tracking-wide">Reii Store &copy; 2026</span>
             </div>
 
-            <!-- Sosial Media Icons -->
             <div class="flex items-center gap-4">
                 <a href="https://wa.me/6283165869029?text=Halo%20Reii%20Store" target="_blank" onclick="playClickSound()" class="w-10 h-10 rounded-xl glass-panel border border-neonBlue/30 text-emerald-400 flex items-center justify-center hover:bg-neonBlue/10 hover:scale-110 transition-all shadow-sm" title="WhatsApp">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
@@ -909,320 +1000,149 @@
         </div>
     </footer>
 
-    <!-- JavaScript Data & Functions -->
+    <!-- JavaScript Data, Cart, & Review System -->
     <script>
-        // Database Deskripsi Rapih per Produk
-        const appDescriptions = {
-            spotify: `
-                <div class="space-y-4">
-                    <div class="text-sm font-extrabold text-neonBlue border-b border-slate-800 pb-2 flex items-center gap-2">
-                        <i class="fa-brands fa-spotify"></i> SPOTIFY PREMIUM
-                    </div>
-                    
-                    <div class="space-y-2">
-                        <div class="font-bold text-white text-xs bg-slate-800/50 p-2 rounded-lg">Type 01 • Spotify Famplan</div>
-                        <div class="pl-2 space-y-1 text-slate-300">
-                            <div class="flex justify-between"><span>• 1 Bulan Fullgar</span> <span class="font-bold text-neonBlue">Rp 17.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Bulan Garansi 24 Jam</span> <span class="font-bold text-neonBlue">Rp 12.000</span></div>
-                        </div>
-                    </div>
+        // State Keranjang Belanja
+        let cart = [];
 
-                    <div class="space-y-2 pt-2">
-                        <div class="font-bold text-white text-xs bg-slate-800/50 p-2 rounded-lg">Type 02 • Spotify Indplan</div>
-                        <div class="pl-2 space-y-1 text-slate-300">
-                            <div class="flex justify-between"><span>• 1 Bulan Fullgar</span> <span class="font-bold text-neonBlue">Rp 16.500</span></div>
-                            <div class="flex justify-between"><span>• 1 Bulan Nogar</span> <span class="font-bold text-neonBlue">Rp 6.000</span></div>
-                            <div class="flex justify-between"><span>• 3 Bulan Garansi 24 Jam</span> <span class="font-bold text-neonBlue">Rp 10.000</span></div>
-                            <div class="flex justify-between"><span>• 3 Bulan Garansi 7 Hari</span> <span class="font-bold text-neonBlue">Rp 13.000</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 space-y-1">
-                        <div class="font-bold text-white">📌 Mini Note:</div>
-                        <div>- SS Garansi 1x24 Jam</div>
-                        <div>- Proses No Rush (Sabar)</div>
-                        <div>- All Device Support</div>
-                        <div>- Fullgar Selama Ikut S&K</div>
-                    </div>
-                </div>
-            `,
-            canva: `
-                <div class="space-y-4">
-                    <div class="text-sm font-extrabold text-neonBlue border-b border-slate-800 pb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> CANVA PRO
-                    </div>
-                    
-                    <div class="space-y-2">
-                        <div class="font-bold text-white text-xs bg-slate-800/50 p-2 rounded-lg">Type 01 • Canva Member</div>
-                        <div class="pl-2 space-y-1 text-slate-300">
-                            <div class="flex justify-between"><span>• 1 Bulan Member</span> <span class="font-bold text-neonBlue">Rp 1.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Bulan Member + Designer</span> <span class="font-bold text-neonBlue">Rp 2.500</span></div>
-                            <div class="flex justify-between"><span>• Canva Edu Lifetime</span> <span class="font-bold text-neonBlue">Rp 4.000</span></div>
-                            <div class="flex justify-between"><span>• Edu Lifetime Admin</span> <span class="font-bold text-neonBlue">Rp 5.000</span></div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-2 pt-2">
-                        <div class="font-bold text-white text-xs bg-slate-800/50 p-2 rounded-lg">Type 02 • Canva Owner / Head</div>
-                        <div class="pl-2 space-y-1 text-slate-300">
-                            <div class="flex justify-between"><span>• 1 Bulan Acc Buyer (B)</span> <span class="font-bold text-neonBlue">Rp 5.500</span></div>
-                            <div class="flex justify-between"><span>• 1 Bulan Acc Seller (S)</span> <span class="font-bold text-neonBlue">Rp 7.000</span></div>
-                            <div class="flex justify-between"><span>• Edu Lifetime Acc Buyer (B)</span> <span class="font-bold text-neonBlue">Rp 8.000</span></div>
-                            <div class="flex justify-between"><span>• Edu Lifetime Acc Seller (S)</span> <span class="font-bold text-neonBlue">Rp 11.000</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 space-y-1">
-                        <div class="font-bold text-white">📌 Mini Note:</div>
-                        <div>- SS Garansi 1x24 Jam</div>
-                        <div>- Acc S: Tanyakan Stok Terlebih Dahulu</div>
-                        <div>- Head Bisa Invite 100 Member</div>
-                        <div>- Edu Lifetime Bisa Invite 500 Member</div>
-                        <div>- Fullgar Selama Ikut S&K</div>
-                    </div>
-                </div>
-            `,
-            alightmotion: `
-                <div class="space-y-4">
-                    <div class="text-sm font-extrabold text-neonBlue border-b border-slate-800 pb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-clapperboard"></i> ALIGHT MOTION PRO
-                    </div>
-                    
-                    <div class="space-y-2">
-                        <div class="font-bold text-white text-xs bg-slate-800/50 p-2 rounded-lg">Type 01 • Alight Motion</div>
-                        <div class="pl-2 space-y-1 text-slate-300">
-                            <div class="flex justify-between"><span>• 1 Tahun Acc Buyer (B)</span> <span class="font-bold text-neonBlue">Rp 8.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Tahun Acc Seller (S)</span> <span class="font-bold text-neonBlue">Rp 14.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Tahun Acc Buyer (B) Nogar</span> <span class="font-bold text-neonBlue">Rp 5.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Tahun Generator</span> <span class="font-bold text-neonBlue">Rp 2.000</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 space-y-1">
-                        <div class="font-bold text-white">📌 Mini Note:</div>
-                        <div>- SS Garansi 1x24 Jam</div>
-                        <div>- Vilog: Send Email + Password</div>
-                        <div>- Acc B: Send Email Saja (Proses Cepat Asal Stay Link)</div>
-                        <div>- Bisa Pakai Email Lama</div>
-                        <div>- Acc S: Tanyakan Stok</div>
-                    </div>
-                </div>
-            `,
-            netflix: `
-                <div class="space-y-4 text-center py-4">
-                    <div class="w-12 h-12 bg-red-500/20 text-red-500 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
-                        <i class="fa-solid fa-tv"></i>
-                    </div>
-                    <h4 class="text-base font-bold text-white">Netflix Premium UHD</h4>
-                    <p class="text-xs text-slate-300">Untuk ketersediaan stok, jenis profil, dan harga terbaru Netflix, silakan langsung menghubungi admin.</p>
-                    <div class="pt-2">
-                        <span class="inline-block px-4 py-2 rounded-xl bg-neonBlue/10 border border-neonBlue/30 text-neonBlue font-bold text-sm">TANYA ADMIN</span>
-                    </div>
-                </div>
-            `,
-            capcut: `
-                <div class="space-y-4">
-                    <div class="text-sm font-extrabold text-neonBlue border-b border-slate-800 pb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-video"></i> CAPCUT PRIVAT
-                    </div>
-                    
-                    <div class="space-y-2">
-                        <div class="font-bold text-white text-xs bg-slate-800/50 p-2 rounded-lg">Type 01 • CapCut Privat</div>
-                        <div class="pl-2 space-y-1 text-slate-300">
-                            <div class="flex justify-between"><span>• 7 Hari Acc Seller (S)</span> <span class="font-bold text-neonBlue">Rp 8.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Bulan Acc Seller (S)</span> <span class="font-bold text-neonBlue">Rp 25.000</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 space-y-1">
-                        <div class="font-bold text-white">📌 Mini Note:</div>
-                        <div>- SS Garansi 1x24 Jam</div>
-                        <div>- Order No Rush</div>
-                        <div>- Tanyakan Stok Terlebih Dahulu</div>
-                    </div>
-                </div>
-            `,
-            youtube: `
-                <div class="space-y-4">
-                    <div class="text-sm font-extrabold text-neonBlue border-b border-slate-800 pb-2 flex items-center gap-2">
-                        <i class="fa-brands fa-youtube"></i> YOUTUBE PREMIUM
-                    </div>
-                    
-                    <div class="space-y-2">
-                        <div class="font-bold text-white text-xs bg-slate-800/50 p-2 rounded-lg">Type 01 • YT Famplan</div>
-                        <div class="pl-2 space-y-1 text-slate-300">
-                            <div class="flex justify-between"><span>• 1 Bulan Famplan</span> <span class="font-bold text-neonBlue">Rp 8.000</span></div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-2 pt-2">
-                        <div class="font-bold text-white text-xs bg-slate-800/50 p-2 rounded-lg">Type 02 • YT Indplan / Famhead</div>
-                        <div class="pl-2 space-y-1 text-slate-300">
-                            <div class="flex justify-between"><span>• 1 Bulan Indplan Acc Buyer (B)</span> <span class="font-bold text-neonBlue">Rp 5.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Bulan Indplan Acc Seller (S)</span> <span class="font-bold text-neonBlue">Rp 10.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Bulan Famhead Acc Buyer (B)</span> <span class="font-bold text-neonBlue">Rp 12.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Bulan Famhead Acc Seller (S)</span> <span class="font-bold text-neonBlue">Rp 15.000</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 space-y-1">
-                        <div class="font-bold text-white">📌 Mini Note:</div>
-                        <div>- SS Garansi 1x24 Jam</div>
-                        <div>- YT Famplan Send Email Saja</div>
-                        <div>- Acc B Bisa Fast Bisa Gak</div>
-                        <div>- Acc S Tanyakan Stok</div>
-                        <div>- Fullgar Selama Ikut S&K</div>
-                    </div>
-                </div>
-            `,
-            wink: `
-                <div class="space-y-4">
-                    <div class="text-sm font-extrabold text-neonBlue border-b border-slate-800 pb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-wand-magic"></i> WINK PRIVAT
-                    </div>
-                    
-                    <div class="space-y-2">
-                        <div class="font-bold text-white text-xs bg-slate-800/50 p-2 rounded-lg">Type 01 • Wink Privat Alldev</div>
-                        <div class="pl-2 space-y-1 text-slate-300">
-                            <div class="flex justify-between"><span>• 7 Jam Acc Buyer (B) Alldev</span> <span class="font-bold text-neonBlue">Rp 3.000</span></div>
-                            <div class="flex justify-between"><span>• 7 Jam Acc Seller (S) Alldev</span> <span class="font-bold text-neonBlue">Rp 5.000</span></div>
-                            <div class="flex justify-between"><span>• 14 Jam Acc Seller (S) Alldev</span> <span class="font-bold text-neonBlue">Rp 10.000</span></div>
-                            <div class="flex justify-between"><span>• 1 Bulan Acc Seller (S) Alldev</span> <span class="font-bold text-neonBlue">Rp 18.000</span></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 space-y-1">
-                        <div class="font-bold text-white">📌 Mini Note:</div>
-                        <div>- Wink Acc Buyer Max Done 1x24 Jam</div>
-                        <div>- Wink Acc Seller 1 Bulan Norenew</div>
-                        <div>- Order No Rush</div>
-                        <div>- Acc Seller Tanyakan Stok</div>
-                    </div>
-                </div>
-            `,
-            chatgpt: `
-                <div class="space-y-4 text-center py-4">
-                    <div class="w-12 h-12 bg-teal-500/20 text-teal-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <h4 class="text-base font-bold text-white">ChatGPT Plus / GPT-4</h4>
-                    <p class="text-xs text-slate-300">Untuk ketersediaan akun ChatGPT Plus dan informasi harga terbaik, silakan tanyakan langsung kepada admin.</p>
-                    <div class="pt-2">
-                        <span class="inline-block px-4 py-2 rounded-xl bg-neonBlue/10 border border-neonBlue/30 text-neonBlue font-bold text-sm">TANYA ADMIN</span>
-                    </div>
-                </div>
-            `
-        };
-
-        // Playlist Musik Online Umum
-        const musicPlaylist = [
-            { title: "Lagu Santai Chill", artist: "Reii Audio Station", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-            { title: "Akustik Malam", artist: "Acoustic Session", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-            { title: "Lofi Beats to Relax", artist: "Lofi Vibes", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-            { title: "Ambient Peaceful", artist: "Calm Sound", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
-            { title: "Morning Sunshine", artist: "Upbeat Melodies", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" }
-        ];
-
-        let currentSongIndex = 0;
-        let audioElement = new Audio(musicPlaylist[0].url);
-        let isPlaying = false;
-
-        const playPauseBtn = document.getElementById('play-icon');
-        const songTitleEl = document.getElementById('current-song-title');
-        const vinylDisc = document.getElementById('vinyl-disc');
-        const progressBar = document.getElementById('progress-bar');
-        const currentTimeEl = document.getElementById('current-time');
-        const durationEl = document.getElementById('duration');
-
-        audioElement.addEventListener('timeupdate', () => {
-            if (audioElement.duration) {
-                const progressPercent = (audioElement.currentTime / audioElement.duration) * 100;
-                progressBar.value = progressPercent;
-                currentTimeEl.textContent = formatTime(audioElement.currentTime);
-                durationEl.textContent = formatTime(audioElement.duration);
-            }
-        });
-
-        audioElement.addEventListener('ended', () => {
-            nextSong();
-        });
-
-        progressBar.addEventListener('input', () => {
-            if (audioElement.duration) {
-                audioElement.currentTime = (progressBar.value / 100) * audioElement.duration;
-            }
-        });
-
-        function togglePlay() {
-            if (isPlaying) {
-                audioElement.pause();
-                isPlaying = false;
-                playPauseBtn.className = "fa-solid fa-play ml-0.5";
-                vinylDisc.classList.remove('animate-vinyl');
-            } else {
-                audioElement.play().catch(e => console.log("Audio play prevented:", e));
-                isPlaying = true;
-                playPauseBtn.className = "fa-solid fa-pause";
-                vinylDisc.classList.add('animate-vinyl');
-            }
-            updatePlaylistUI();
-        }
-
-        function selectSong(index) {
-            currentSongIndex = index;
-            audioElement.src = musicPlaylist[currentSongIndex].url;
-            songTitleEl.textContent = musicPlaylist[currentSongIndex].title;
-            document.getElementById('current-song-artist').textContent = musicPlaylist[currentSongIndex].artist;
-            audioElement.play();
-            isPlaying = true;
-            playPauseBtn.className = "fa-solid fa-pause";
-            vinylDisc.classList.add('animate-vinyl');
-            updatePlaylistUI();
-        }
-
-        function nextSong() {
-            currentSongIndex = (currentSongIndex + 1) % musicPlaylist.length;
-            selectSong(currentSongIndex);
-        }
-
-        function prevSong() {
-            currentSongIndex = (currentSongIndex - 1 + musicPlaylist.length) % musicPlaylist.length;
-            selectSong(currentSongIndex);
-        }
-
-        function updatePlaylistUI() {
-            const items = document.querySelectorAll('.song-item');
-            items.forEach((item, idx) => {
-                const indicator = item.querySelector('.play-indicator');
-                if (idx === currentSongIndex) {
-                    item.classList.add('border-neonBlue', 'bg-neonBlue/10');
-                    if (isPlaying) {
-                        indicator.classList.remove('hidden');
-                    } else {
-                        indicator.classList.add('hidden');
-                    }
-                } else {
-                    item.classList.remove('border-neonBlue', 'bg-neonBlue/10');
-                    indicator.classList.add('hidden');
-                }
-            });
-        }
-
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-
-        function openDescModal(appKey) {
+        function addToCart(productName, price) {
             playClickSound();
-            const contentDiv = document.getElementById('descModalContent');
-            contentDiv.innerHTML = appDescriptions[appKey] || '<p class="text-center text-slate-400">Deskripsi tidak ditemukan.</p>';
-            document.getElementById('descModal').classList.remove('hidden');
+            cart.push({ name: productName, price: price });
+            updateCartUI();
+            
+            const notif = document.createElement('div');
+            notif.className = 'fixed bottom-6 right-6 z-50 glass-panel border border-neonBlue text-white px-4 py-3 rounded-2xl shadow-neon text-xs font-bold flex items-center gap-2 animate-bounce';
+            notif.innerHTML = `<i class="fa-solid fa-circle-check text-neonBlue"></i> ${productName} ditambahkan ke keranjang!`;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 2500);
         }
 
-        function closeDescModal() {
-            document.getElementById('descModal').classList.add('hidden');
+        function removeFromCart(index) {
+            playClickSound();
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function clearCart() {
+            playClickSound();
+            cart = [];
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const mobileBadge = document.getElementById('mobile-cart-badge');
+            const dashCount = document.getElementById('dash-cart-count');
+            const container = document.getElementById('cart-items-container');
+            const totalPriceEl = document.getElementById('cart-total-price');
+
+            const totalItems = cart.length;
+            badge.textContent = totalItems;
+            if(mobileBadge) mobileBadge.textContent = totalItems;
+            if(dashCount) dashCount.textContent = totalItems;
+
+            if (totalItems === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-400 text-center py-6">Keranjang belanja Anda masih kosong.</p>';
+                totalPriceEl.textContent = 'Rp 0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-darkCard border border-slate-800 text-xs">
+                        <div>
+                            <h4 class="font-bold text-white">${item.name}</h4>
+                            <p class="text-neonBlue font-semibold">${item.price > 0 ? 'Rp ' + item.price.toLocaleString('id-ID') : 'Tanya Admin'}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-rose-400 hover:text-rose-300 p-2"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            totalPriceEl.textContent = total > 0 ? 'Rp ' + total.toLocaleString('id-ID') : 'Tergantung Pesanan';
+        }
+
+        function openCartModal() {
+            document.getElementById('cartModal').classList.remove('hidden');
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').classList.add('hidden');
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                alert('Keranjang belanja Anda masih kosong!');
+                return;
+            }
+            playClickSound();
+            let text = "Halo Reii Store, saya ingin memesan produk berikut dari keranjang:\n\n";
+            let total = 0;
+            cart.forEach((item, i) => {
+                text += `${i + 1}. ${item.name} (${item.price > 0 ? 'Rp ' + item.price.toLocaleString('id-ID') : 'Tanya Admin'})\n`;
+                total += item.price;
+            });
+            text += `\nTotal Estimasi: ${total > 0 ? 'Rp ' + total.toLocaleString('id-ID') : 'Tanya Admin'}\nMohon proses pesanan saya. Terima kasih!`;
+            
+            const encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/6283165869029?text=${encoded}`, '_blank');
+        }
+
+        // Sistem Ulasan
+        function openReviewModal() {
+            document.getElementById('reviewModal').classList.remove('hidden');
+        }
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.add('hidden');
+        }
+        function submitReview(event) {
+            event.preventDefault();
+            playClickSound();
+            const name = document.getElementById('reviewName').value;
+            const product = document.getElementById('reviewProduct').value;
+            const comment = document.getElementById('reviewComment').value;
+            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+            const grid = document.getElementById('reviews-grid');
+            const newCard = document.createElement('div');
+            newCard.className = 'glass-panel p-6 rounded-3xl border border-slate-800 flex flex-col justify-between space-y-4 animate-fadeIn';
+            newCard.innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex text-amber-400 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-semibold"><i class="fa-solid fa-check"></i> Terverifikasi</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed italic">"${comment}"</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-slate-800 text-xs">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-neonBlue/20 text-neonBlue flex items-center justify-center font-bold">${initials}</div>
+                        <div><h4 class="font-bold text-white">${name}</h4><p class="text-[10px] text-slate-400">${product}</p></div>
+                    </div>
+                    <span class="text-[10px] text-emerald-400">Baru saja</span>
+                </div>
+            `;
+            grid.prepend(newCard);
+            closeReviewModal();
+            document.getElementById('reviewForm').reset();
+            alert('Ulasan berhasil dikirim! Terima kasih telah mempercayai Reii Store.');
+        }
+
+        // Audio Sambutan "Selamat Datang di Reii Store"
+        function speakWelcome() {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance("Selamat datang di Reii Store");
+                utterance.lang = 'id-ID';
+                utterance.rate = 0.95;
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            }
         }
 
         // Web Audio API untuk Efek Suara Klik Tombol
@@ -1249,15 +1169,16 @@
             }
         }
 
-        // Hide Loader on initial page load
+        // Hide Loader & Jalankan Suara Sambutan saat Halaman Selesai Dimuat
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const overlay = document.getElementById('page-transition-overlay');
                 if (overlay) overlay.classList.remove('active');
+                speakWelcome();
             }, 600);
         });
 
-        // Switch Page Function with Modern Transition Loader (Active menu becomes blue, others white)
+        // Switch Page Function with Modern Transition Loader
         function switchPage(pageId, event) {
             if (event) event.preventDefault();
             playClickSound();
@@ -1288,7 +1209,7 @@
                 setTimeout(() => {
                     if (overlay) overlay.classList.remove('active');
                 }, 300);
-            }, 400);
+            }, 350);
         }
 
         // Mobile Menu Toggle
